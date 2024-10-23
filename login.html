@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="dist/rpgui.css" rel="stylesheet" type="text/css" />
+        <script src="dist/rpgui.js"></script>
+        <script src="js/login.js" type="module" async></script>
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <title>登录</title>
+    </head>
+    <body>
+        <div class="rpgui-content bg">
+            <div class="rpgui-container framed-golden" id="main">
+                <div id="title-bar">
+                    <h1 class="title">登录</h1>
+                </div>
+                <hr class="golden" />
+                <div id="login-form" class="rpgui-container framed-grey">
+                    <form id="login-form">
+                        <div>
+                            <label for="username">用户名:</label>
+                            <input type="text" id="username" required />
+                        </div>
+                        <div>
+                            <label for="password">密码:</label>
+                            <input type="password" id="password" required />
+                        </div>
+                        <button type="button" class="rpgui-button golden">
+                            <p>登录</p>
+                        </button>
+                        <p class="error" id="errorMessage"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

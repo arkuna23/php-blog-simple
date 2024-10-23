@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'Pixel Font';
+    src: url('../fonts/fusion-pixel-12px-proportional-zh_hans.woff2')
+        format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Pixel Font', sans-serif !important;
+}
+
+.bg {
+    background-image: url('../assets/bg.png');
+    background-size: auto 100%;
+}
+
+#title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 3em !important;
+    margin: 0 !important;
+}
+
+#title-msgs {
+    font-size: 2.5em;
+}
+
+#main {
+    position: relative;
+    max-width: 80%;
+    margin: 120px auto;
+}
+
+#avatar-slot {
+    display: grid;
+    place-items: center;
+}
+
+#avatar {
+    width: 75%;
+    height: 75%;
+    object-fit: cover;
+}
+
+.error {
+    color: red;
+}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="dist/rpgui.css" rel="stylesheet" type="text/css" />
+        <script src="dist/rpgui.js"></script>
+        <script src="js/index.js" type="module" async></script>
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <title>欢迎</title>
+    </head>
+    <body>
+        <div class="rpgui-content bg">
+            <div class="rpgui-container framed-golden" id="main">
+                <div id="title-bar">
+                    <h1 id="title-welcome">欢迎</h1>
+                    <div class="rpgui-icon empty-slot" id="avatar-slot">
+                        <img src="assets/default_avatar.jpg" id="avatar" />
+                    </div>
+                </div>
+                <hr class="golden" />
+                <div id="menu">
+                    <button
+                        class="rpgui-button"
+                        style="display: none"
+                        onclick="await backupUsers()"
+                        id="backup-users"
+                    >
+                        备份用户
+                    </button>
+                    <button
+                        class="rpgui-button"
+                        style="display: none"
+                        onclick="await backupMessages()"
+                        id="backup-msgs"
+                    >
+                        备份留言
+                    </button>
+                    <button
+                        class="rpgui-button"
+                        id="add-msg"
+                        onclick="add_msg()"
+                    >
+                        留言
+                    </button>
+                    <button class="rpgui-button" onclick="logout()">
+                        登出
+                    </button>
+                </div>
+                <hr />
+                <div id="messages">
+                    <h2 id="title-msgs">留言板</h2>
+                    <div
+                        id="messages"
+                        class="rpgui-container framed-grey"
+                    ></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
