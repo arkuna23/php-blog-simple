@@ -19,17 +19,21 @@ $add_serv = new JsonServ(
         $stmt->bind_param("ss", $username, $json['message']);
         $stmt->execute();
 
-        json_data(true, "留言成功");
+        echo json_data(true, "留言成功");
     }
 );
 $delete_serv = new JsonServ(
     'DELETE',
-    function ($json) use ($username, $conn) {
+    function ($params) use ($username, $conn) {
         $sql = "DELETE FROM tb_messages WHERE username = ? AND id = ?;";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("si", $username, $json['id']);
+        $stmt->bind_param("si", $username, $params['id']);
         $stmt->execute();
-        json_data(true, "删除成功");
+        if ($stmt->affected_rows == 0) {
+            echo json_err("删除失败", 500);
+        } else {
+            echo json_data(true, "删除成功");
+        }
     }
 );
 $get_serv = new JsonServ(
@@ -50,7 +54,7 @@ $get_serv = new JsonServ(
         while ($row = $result->fetch_assoc()) {
             $messages[] = $row;
         }
-        json_data(true, "", $messages);
+        echo json_data(true, "", $messages);
     }
 );
 

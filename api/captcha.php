@@ -9,6 +9,10 @@ $captcha_code = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGH
 $_SESSION['captcha'] = $captcha_code;
 
 $image = imagecreatetruecolor($width, $height);
+if (!$image) {
+    die('图像创建失败');
+}
+
 $background_color = imagecolorallocate($image, 255, 255, 255);
 $text_color = imagecolorallocate($image, 0, 0, 0);
 $line_color = imagecolorallocate($image, 64, 64, 64);
@@ -20,15 +24,12 @@ for ($i = 0; $i < 5; $i++) {
 }
 
 $font_size = 5;
-
 $text_width = imagefontwidth($font_size) * strlen($captcha_code);
 $text_height = imagefontheight($font_size);
-
 $x = ($width - $text_width) / 2;
 $y = ($height - $text_height) / 2;
 
 imagestring($image, $font_size, $x, $y, $captcha_code, $text_color);
 
-header('Content-Type: image/png');
 imagepng($image);
 imagedestroy($image);

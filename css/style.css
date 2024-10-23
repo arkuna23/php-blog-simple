@@ -10,9 +10,18 @@
     font-family: 'Pixel Font', sans-serif !important;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .bg {
     background-image: url('../assets/bg.png');
-    background-size: auto 100%;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #title-bar {
@@ -21,32 +30,116 @@
     align-items: center;
 }
 
+#tip {
+    margin-right: 10px;
+}
+
 .title {
-    font-size: 3em !important;
+    font-size: 3em;
     margin: 0 !important;
 }
 
-#title-msgs {
-    font-size: 2.5em;
+.title-2 {
+    font-size: 2.4em;
+}
+
+.rpgui-button {
+    font-size: 1em;
+}
+
+.input-box,
+.captcha-input,
+.avatar-header,
+.hori-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.captcha-input {
+    width: 100%;
+}
+
+.label {
+    font-size: 1.2em;
+    white-space: nowrap;
+    width: 12ch;
+}
+
+.input {
+    font-size: 1em;
 }
 
 #main {
     position: relative;
     max-width: 80%;
     margin: 120px auto;
+    z-index: 100;
 }
 
-#avatar-slot {
+.avatar-slot {
     display: grid;
     place-items: center;
 }
 
-#avatar {
+#avatar,
+.message .avatar {
     width: 75%;
     height: 75%;
     object-fit: cover;
 }
 
-.error {
-    color: red;
+.msg-header {
+    display: flex;
+}
+
+.msg-header .msg-info {
+    margin-left: 8px;
+}
+
+.msg-header .username {
+    text-align: start;
+    font-size: 1.4em;
+    margin: 0;
+}
+
+.message {
+    margin: auto 2em;
+}
+
+#preview {
+    position: relative;
+    margin-top: 20px;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+}
+input[type='file'] {
+    display: none; /* 隐藏默认的文件输入 */
+}
+
+.center-box {
+    display: grid;
+    place-items: center;
+}
+
+#error-msg {
+    font-size: 1em;
+}
+
+#fileInput {
+    width: 20%;
+}
+#preview img {
+    width: 100%;
+    height: auto;
+}
+
+#custom-upload {
+    min-width: 10ch;
+    margin-right: 20px;
 }

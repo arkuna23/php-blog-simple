@@ -1,15 +1,16 @@
-import { login, register_click } from './api.js'
+import { register_click, register } from './api.js'
 
-register_click('login', async function (event) {
+register_click('register', async (event) => {
     event.preventDefault()
 
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
     const captcha = document.getElementById('captcha').value
+    const resp = await register(username, password, captcha)
+    const json = await resp.json()
 
-    const result = await login(username, password, captcha)
-    const json = await result.json()
     if (json.succ) {
+        alert('注册成功')
         window.location.href = '/'
     } else {
         const ele = document.getElementById('error-msg')

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="dist/rpgui.css" rel="stylesheet" type="text/css" />
+        <script src="dist/rpgui.js"></script>
+        <script src="js/set_avatar.js" type="module" async></script>
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <title>设置头像</title>
+    </head>
+    <body>
+        <div class="rpgui-content bg">
+            <div class="rpgui-container framed-golden" id="main">
+                <div id="title-bar">
+                    <h1 class="title">设置头像</h1>
+                    <div class="rpgui-icon empty-slot avatar-slot">
+                        <img src="api/avatar.php" id="avatar" />
+                    </div>
+                </div>
+                <hr class="golden" />
+                <div class="center-box">
+                    <input type="file" id="fileInput" accept="image/*" />
+                    <div id="preview" class="rpgui-container framed">
+                        预览区域
+                    </div>
+                    <div class="hori-menu">
+                        <label
+                            for="fileInput"
+                            id="custom-upload"
+                            class="rpgui-button"
+                        >
+                            <p>选择文件</p>
+                        </label>
+                        <button
+                            class="rpgui-button golden"
+                            id="upload-btn"
+                            disabled
+                        >
+                            <p>上传</p>
+                        </button>
+                    </div>
+                    <p id="error-msg"></p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

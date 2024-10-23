@@ -5,19 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="dist/rpgui.css" rel="stylesheet" type="text/css" />
         <script src="dist/rpgui.js"></script>
-        <script src="js/register.js" type="module" async></script>
+        <script src="js/reset_pwd.js" type="module" async></script>
         <link href="css/style.css" rel="stylesheet" type="text/css" />
-        <title>注册</title>
+        <title>重置密码</title>
     </head>
     <body>
         <div class="rpgui-content bg">
             <div class="rpgui-container framed-golden" id="main">
                 <div id="title-bar">
-                    <h1 class="title">注册</h1>
+                    <h1 class="title">重置密码</h1>
                 </div>
                 <hr class="golden" />
-                <div id="register-form" class="rpgui-container framed-grey">
-                    <form id="register-form">
+                <div id="login-form" class="rpgui-container framed-grey">
+                    <form id="login-form">
                         <div class="input-box">
                             <label class="label" for="username">用户名:</label>
                             <input
@@ -28,7 +28,7 @@
                             />
                         </div>
                         <div class="input-box">
-                            <label class="label" for="password">密码:</label>
+                            <label class="label" for="password">旧密码:</label>
                             <input
                                 type="password"
                                 id="password"
@@ -37,10 +37,10 @@
                             />
                         </div>
                         <div class="input-box">
-                            <label class="label">确认密码:</label>
+                            <label class="label" for="password">新密码:</label>
                             <input
                                 type="password"
-                                id="password-confirm"
+                                id="new-password"
                                 required
                                 class="input"
                             />
@@ -64,12 +64,13 @@
                         <div class="hori-menu">
                             <button
                                 type="submit"
-                                id="register"
-                                class="rpgui-button"
+                                class="rpgui-button golden"
+                                id="reset-btn"
                             >
-                                <p>注册</p>
+                                <p>重置</p>
                             </button>
                         </div>
+
                         <p id="error-msg"></p>
                     </form>
                 </div>

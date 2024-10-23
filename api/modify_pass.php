@@ -31,7 +31,7 @@ json_service([
         }
 
         check_password($new_password, $input_username);
-        $sql = "UPDATE users SET password = ? WHERE username = ?;";
+        $sql = "UPDATE tb_users SET password = ? WHERE username = ?;";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", hash('sha256', $new_password), $input_username);
         $stmt->execute();

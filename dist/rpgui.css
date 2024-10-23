@@ -67,7 +67,6 @@ inside your html file.
     background-position: center;
     background-size: 100% 100%;
     /* font size */
-    font-size: 1em;
     /* default size and display */
     max-width: 100%;
     min-width: 140px;
@@ -229,7 +228,6 @@ inside your html file.
     top: 0px;
     position: fixed;
     overflow: hidden;
-    font-size: 0.8em;
 }
 
 /* general rules to apply on anything inside the content */
@@ -613,7 +611,6 @@ ul.rpgui-dropdown-imp {
         0 2px black,
         2px 0 black,
         0 -2px black;
-    font-size: 0.9em;
     line-height: 32px;
     background: #4e4a4e;
     max-width: 100%;
@@ -736,7 +733,6 @@ ul.rpgui-list-imp {
         0 2px black,
         2px 0 black,
         0 -2px black;
-    font-size: 1.14em;
     /* center text */
     text-align: center;
     /* padding */
@@ -753,7 +749,6 @@ ul.rpgui-list-imp {
         0 2px black,
         2px 0 black,
         0 -2px black;
-    font-size: 1.25em;
     /* center text */
     text-align: center;
     /* padding */
@@ -771,7 +766,6 @@ ul.rpgui-list-imp {
         0 2px black,
         2px 0 black,
         0 -2px black;
-    font-size: 1.15em;
     text-decoration: underline;
     /* center text */
     text-align: center;
@@ -790,7 +784,6 @@ ul.rpgui-list-imp {
         0 2px black,
         2px 0 black,
         0 -2px black;
-    font-size: 1em;
     text-decoration: underline;
     /* center text */
     text-align: center;
@@ -808,7 +801,6 @@ ul.rpgui-list-imp {
         0 2px black,
         2px 0 black,
         0 -2px black;
-    font-size: 1em;
     line-height: 22px;
 }
 
@@ -821,7 +813,6 @@ ul.rpgui-list-imp {
         0 2px black,
         2px 0 black,
         0 -2px black;
-    font-size: 1em;
     line-height: 22px;
 }
 
@@ -834,7 +825,6 @@ ul.rpgui-list-imp {
         0 2px black,
         2px 0 black,
         0 -2px black;
-    font-size: 1em;
     line-height: 22px;
     text-decoration: none;
 }
@@ -853,7 +843,6 @@ ul.rpgui-list-imp {
         0 2px black,
         2px 0 black,
         0 -2px black;
-    font-size: 1em;
     line-height: 20px;
     display: inline;
 }
@@ -868,7 +857,6 @@ ul.rpgui-list-imp {
         0 2px black,
         2px 0 black,
         0 -2px black;
-    font-size: 1em;
     line-height: 22px;
 }
 

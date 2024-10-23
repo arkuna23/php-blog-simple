@@ -2,7 +2,7 @@ CREATE DATABASE website;
 
 USE website;
 
-CREATE TABLE users (
+CREATE TABLE tb_users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password CHAR(64) NOT NULL,

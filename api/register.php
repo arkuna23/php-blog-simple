@@ -45,7 +45,7 @@ json_service([
             json_err("用户名已存在", 409);
         } else {
             $hashed_password = hash('sha256', $password);
-            $sql = "INSERT INTO users (username, password) VALUES (?, ?);";
+            $sql = "INSERT INTO tb_users (username, password) VALUES (?, ?);";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ss", $input_username, $hashed_password);
             $stmt->execute();
@@ -53,5 +53,6 @@ json_service([
             setcookie('session', encrypt($input_username, SESSION_KEY), time() + (86400 * 30), "/", "", true, true);
             echo json_data(true, "", null);
         }
+        unset($_SESSION['captcha']);
     })
 ]);

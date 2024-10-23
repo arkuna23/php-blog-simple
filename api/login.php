@@ -4,13 +4,19 @@ include_once "lib.php";
 
 session_start();
 
+if (!isset($_SESSION['captcha'])) {
+    writeLog("Captcha not set", LogLevel::ERROR);
+    json_err("验证码未设置", 500);
+}
+
 json_service([
     new JsonServ('POST', function ($json) {
         $input_username = $json['username'] ?? '';
         $input_password = $json['password'] ?? '';
         $input_captcha = $json['captcha'] ?? '';
+        $captcha = $_SESSION['captcha'];
         if (strcasecmp($input_captcha, $_SESSION['captcha']) !== 0) {
-            writeLog("[user: $input_username]Captcha mismatch", LogLevel::ERROR);
+            writeLog("[user: $input_username]Captcha mismatch(in: $input_captcha, expected $captcha)", LogLevel::ERROR);
             json_err("验证码错误", 400);
         }
         $hashed_password = hash('sha256', $input_password);
@@ -20,7 +26,7 @@ json_service([
             writeLog("[user: $input_username]Database connection error: " . $conn->connect_error, LogLevel::ERROR);
             json_err("数据库连接错误: " . $conn->connect_error, 500);
         }
-        $sql = "SELECT * FROM users WHERE username = ? AND password = ?;";
+        $sql = "SELECT * FROM tb_users WHERE username = ? AND password = ?;";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", $input_username, $hashed_password);
         $stmt->execute();

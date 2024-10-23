@@ -7,10 +7,10 @@ function padKey(string $key)
     return str_pad(substr($key, 0, 32), 32, "\0");
 }
 
-enum LogLevel
+enum LogLevel: string
 {
-    case INFO;
-    case ERROR;
+    case INFO = 'INFO';
+    case ERROR = 'ERROR';
 }
 
 function writeLog(string $message, LogLevel $level = LogLevel::INFO)
@@ -20,7 +20,7 @@ function writeLog(string $message, LogLevel $level = LogLevel::INFO)
         $file = dirname(__FILE__, 2) . '/error.log';
     }
     $timestamp = date('Y-m-d H:i:s');
-    $logEntry = "[$timestamp] [$level] $message" . PHP_EOL;
+    $logEntry = "[$timestamp] [$level->value] $message" . PHP_EOL;
     file_put_contents($file, $logEntry, FILE_APPEND | LOCK_EX);
 }
 
@@ -49,27 +49,30 @@ function json_err(string $msg, int $code, bool $exit = true)
 {
     http_response_code($code);
     echo json_data(false, $msg, null);
-    if ($exit) exit();
-}
-
-class JsonServ {
-    public string $method;
-    public callable $json_succ_call;
-    public callable $json_fail_call;
-    public function __construct(
-        string $method, 
-        callable $json_succ_call, 
-        callable $json_fail_call = function ($msg) {
-        echo json_data(false, $msg, null);
-    })
-    {
-        $this->method = $method;
-        $this->json_succ_call = $json_succ_call;
-        $this->json_fail_call = $json_fail_call;
+    if ($exit) {
+        exit();
     }
 }
 
-/** 
+class JsonServ
+{
+    public string $method;
+    public mixed $json_succ_call;
+    public mixed $json_fail_call;
+    public function __construct(
+        string $method,
+        callable $json_succ_call,
+        callable $json_fail_call = null
+    ) {
+        $this->method = $method;
+        $this->json_succ_call = $json_succ_call;
+        $this->json_fail_call = $json_fail_call ?? function ($msg) {
+            echo json_data(false, $msg, null);
+        };
+    }
+}
+
+/**
 * @param JsonServ[] $services
 */
 function json_service(
@@ -79,25 +82,27 @@ function json_service(
         $method = $_SERVER['REQUEST_METHOD'];
         if ($method === $serv->method) {
             // GET method
-            if ($method === 'GET') {
+            if ($method === 'GET' || $method === 'DELETE') {
                 ($serv->json_succ_call)($_GET);
                 return;
-            } 
+            }
 
             $contentType = $_SERVER['CONTENT_TYPE'];
-            
+            writeLog("content type: $contentType");
+
             if (strpos($contentType, 'application/json') !== false) {
-                $data = json_decode(file_get_contents('php://input'), true);
+                $data = file_get_contents('php://input');
+                $json = json_decode($data, true);
                 if (json_last_error() === JSON_ERROR_NONE) {
-                    ($serv->json_succ_call)($data);
+                    ($serv->json_succ_call)($json);
                 } else {
                     ($serv->json_fail_call)(json_last_error_msg());
                 }
                 return;
-            } else if ($method === 'POST') {
+            } elseif ($method === 'POST') {
                 ($serv->json_succ_call)($_POST);
                 return;
-            } 
+            }
         }
     }
 }

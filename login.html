@@ -18,18 +18,68 @@
                 <hr class="golden" />
                 <div id="login-form" class="rpgui-container framed-grey">
                     <form id="login-form">
-                        <div>
-                            <label for="username">用户名:</label>
-                            <input type="text" id="username" required />
+                        <div class="input-box">
+                            <label class="label" for="username">用户名:</label>
+                            <input
+                                type="text"
+                                id="username"
+                                required
+                                class="input"
+                            />
                         </div>
-                        <div>
-                            <label for="password">密码:</label>
-                            <input type="password" id="password" required />
+                        <div class="input-box">
+                            <label class="label" for="password">密码:</label>
+                            <input
+                                type="password"
+                                id="password"
+                                required
+                                class="input"
+                            />
                         </div>
-                        <button type="button" class="rpgui-button golden">
-                            <p>登录</p>
-                        </button>
-                        <p class="error" id="errorMessage"></p>
+                        <div class="input-box">
+                            <label class="label" for="password">验证码:</label>
+                            <div class="captcha-input">
+                                <input
+                                    type="text"
+                                    id="captcha"
+                                    required
+                                    class="input"
+                                />
+                                <img
+                                    src="api/captcha.php"
+                                    alt="验证码"
+                                    class="captcha-image"
+                                />
+                            </div>
+                        </div>
+                        <div class="hori-menu">
+                            <button
+                                type="submit"
+                                class="rpgui-button golden"
+                                id="login"
+                            >
+                                <p>登录</p>
+                            </button>
+                            <div class="hori-menu">
+                                <button
+                                    class="rpgui-button"
+                                    id="reset-btn"
+                                    onclick="window.location.href = '/reset_pwd.html'"
+                                >
+                                    <p>重置密码</p>
+                                </button>
+                                <button
+                                    class="rpgui-button"
+                                    id="register-btn"
+                                    type="button"
+                                    onclick="window.location.href='register.html'"
+                                >
+                                    <p>注册</p>
+                                </button>
+                            </div>
+                        </div>
+
+                        <p id="error-msg"></p>
                     </form>
                 </div>
             </div>

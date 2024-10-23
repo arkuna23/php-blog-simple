@@ -1,16 +1,18 @@
-import { login, register_click } from './api.js'
+import { register_click, modify_pwd } from './api.js'
 
-register_click('login', async function (event) {
+register_click('reset-btn', async (event) => {
     event.preventDefault()
 
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
+    const new_password = document.getElementById('password').value
     const captcha = document.getElementById('captcha').value
+    const resp = await modify_pwd(username, password, new_password, captcha)
+    const json = await resp.json()
 
-    const result = await login(username, password, captcha)
-    const json = await result.json()
     if (json.succ) {
-        window.location.href = '/'
+        alert('重置成功')
+        window.location.href = '/login.html'
     } else {
         const ele = document.getElementById('error-msg')
         ele.style.color = 'red'

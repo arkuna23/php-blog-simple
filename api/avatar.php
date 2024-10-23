@@ -1,12 +1,13 @@
 <?php
 
-include_once "lib.php";
+require_once "lib.php";
 
 session_start();
 $username = get_username();
 
+
 $post_serv = new JsonServ('POST', function () use ($username) {
-    $uploadDir = 'uploads/';
+    $uploadDir = '../uploads/';
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0755, true);
     }
@@ -15,7 +16,8 @@ $post_serv = new JsonServ('POST', function () use ($username) {
         $file = $_FILES['avatar'];
 
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            writeLog("上传文件失败: " . $file['error'], );
+            $level = LogLevel::ERROR;
+            writeLog("上传文件失败: " . $file['error'], $level);
             json_err("文件上传失败", 500);
         }
 
@@ -29,24 +31,52 @@ $post_serv = new JsonServ('POST', function () use ($username) {
             json_err("只允许上传 JPEG、PNG 或 GIF 格式的图片。", 400);
         }
 
+        foreach (['jpg', 'jpeg', 'png', 'gif'] as $type) {
+            $fileName = 'avatar_' . $username . '.' . $type;
+            $uploadFilePath = $uploadDir . $fileName;
+
+            if (file_exists($uploadFilePath)) {
+                if (!unlink($uploadFilePath)) {
+                    writeLog("删除旧头像失败: $fileName", LogLevel::ERROR);
+                    json_err("无法删除旧头像", 500);
+                }
+            }
+        }
+
         $fileName = 'avatar_' . $username . '.' . $fileExtension;
         $uploadFilePath = $uploadDir . $fileName;
 
         if (move_uploaded_file($file['tmp_name'], $uploadFilePath)) {
-            json_data(true, "头像上传成功");
+            echo json_data(true, "头像上传成功");
         } else {
+            writeLog("上传文件失败: $fileName", LogLevel::ERROR);
             json_err("文件上传失败", 500);
         }
     }
 });
-$get_serv = new JsonServ('GET', function () use ($username) {
+$get_serv = new JsonServ('GET', function ($params) use ($username) {
     $avatarDir = '../uploads/';
-    $avatarPath = $avatarDir . 'avatar_' . $username . '.jpg';
-    if (file_exists($avatarPath)) {
-        header('Content-Type: image/jpeg');
+    if (isset($params['username'])) {
+        $username = $params['username'];
+    }
+    $avatarPath = $avatarDir . 'avatar_' . $username;
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $foundImage = false;
+
+    foreach ($allowedExtensions as $extension) {
+        if (file_exists($avatarPath . '.' . $extension)) {
+            $avatarPath .= '.' . $extension;
+            $foundImage = true;
+            break;
+        }
+    }
+
+    if ($foundImage) {
+        $extension = pathinfo($avatarPath, PATHINFO_EXTENSION);
+        header('Content-Type: image/' . $extension);
         readfile($avatarPath);
     } else {
-        header('Content-Type: image/png');
+        header('Content-Type: image/jpg');
         readfile('../assets/default_avatar.jpg');
     }
 });
