@@ -17,9 +17,8 @@ body {
 
 .bg {
     background-image: url('../assets/bg.png');
-    background-size: 100% auto;
     background-repeat: no-repeat;
-    background-position: bottom;
+    background-position: right bottom;
     overflow-y: scroll;
     overflow-x: hidden;
 }
