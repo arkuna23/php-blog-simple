@@ -5,7 +5,7 @@ register_click('reset-btn', async (event) => {
 
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
-    const new_password = document.getElementById('password').value
+    const new_password = document.getElementById('new-password').value
     const captcha = document.getElementById('captcha').value
     const resp = await modify_pwd(username, password, new_password, captcha)
     const json = await resp.json()

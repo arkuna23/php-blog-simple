@@ -34,6 +34,13 @@ export async function request(url, init, is_json = true) {
             onUnauthorized()
             break
         default:
+            if (is_json) {
+                try {
+                    await resp.json()
+                } catch (err) {
+                    show_error('返回数据错误: ' + err)
+                }
+            }
             return resp
     }
 }
